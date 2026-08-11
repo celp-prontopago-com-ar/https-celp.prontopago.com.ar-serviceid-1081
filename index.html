@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pago con Tarjeta de Débito</title>
+    <!-- Fuente Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Encabezado al 100% para lograr la separación exacta de la imagen original */
+        .header {
+            width: 100%;
+            border-bottom: 1px solid #dcdcdc; /* La línea divisoria sutil */
+            padding: 12px 0;
+            background-color: #ffffff;
+        }
+
+        .header-content {
+            width: 92%;
+            max-width: 380px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-content img {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-content h1 {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #333333;
+            margin: 0;
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        /* Contenedor central maestro que controla el ancho exacto idéntico al original */
+        .app-container {
+            width: 92%;
+            max-width: 380px; /* Medida justa para que no se estire */
+            margin: 24px auto 30px auto; /* Margen superior ajustado para respetar la separación */
+        }
+
+        /* Tarjeta Principal (Gris y cuadrada, sin estirarse) */
+        .card-container {
+            width: 100%;
+            background-color: #dedede; /* Tono de gris exacto */
+            border-radius: 0; /* Bordes rectos */
+        }
+
+        /* Imagen Verde de Pasos */
+        .stepper-img {
+            width: 100%;
+            display: block;
+            border-radius: 0;
+        }
+
+        /* Cuerpo del Formulario */
+        .card-body {
+            padding: 18px 16px 16px 16px;
+        }
+
+        .card-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-top: 0;
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
+
+        /* Grupos de Inputs */
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 38px;
+            padding: 0 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12.5px;
+            color: #333333;
+            outline: none;
+        }
+
+        /* Quitar flechas del input number */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Fondo celeste exacto al tipear DNI */
+        .input-group input:focus, 
+        .input-group input.has-value {
+            background-color: #e8f0fe !important;
+        }
+
+        .input-group input::placeholder {
+            color: #b0b8c1;
+            font-size: 12px;
+        }
+
+        .input-hint {
+            display: block;
+            font-size: 10px;
+            color: #666666;
+            margin-top: 3px;
+        }
+
+        /* Línea Divisora */
+        .divider {
+            border: none;
+            border-top: 1px solid #cfcfcf;
+            margin: 18px 0 14px 0;
+        }
+
+        /* Botón Seleccionar */
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-seleccionar {
+            background-color: #1e873b; /* Verde idéntico a la imagen original */
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px; /* Tamaño un poco más ancho e idéntico */
+            border-radius: 4px; /* Bordes ligeramente más suaves */
+            font-size: 13px; /* Tamaño de texto adecuado */
+            font-weight: 600; /* Peso de fuente para que calce perfecto */
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header fuera del app-container para que la línea divisoria cruce toda la pantalla -->
+    <header class="header">
+        <div class="header-content">
+            <img src="logo.png" alt="CELP">
+            <h1>Pago con Tarjeta de Débito</h1>
+        </div>
+    </header>
+
+    <!-- Contenedor Maestro que unifica medidas y centrado -->
+    <div class="app-container">
+
+        <!-- Tarjeta Principal -->
+        <div class="card-container">
+            <img src="img/1.jpg" alt="Pasos" class="stepper-img">
+
+            <div class="card-body">
+                <h2 class="card-title">Ingresá algún dato del comprobante a buscar</h2>
+
+                <div class="input-group" id="group-dni">
+                    <label>DNI</label>
+                    <input type="number" id="input-dni" placeholder="DNI">
+                    <span class="input-hint">Ingrese DNI</span>
+                </div>
+
+                <div class="input-group" id="group-cod">
+                    <label>Cód. Asociado</label>
+                    <input type="text" id="input-cod" placeholder="Cód. Asociado">
+                    <span class="input-hint">Ingrese Cód. Asociado</span>
+                </div>
+
+                <div class="input-group" id="group-suministro">
+                    <label>Nro Suministro</label>
+                    <input type="text" id="input-suministro" placeholder="Nro Suministro">
+                    <span class="input-hint">Ingrese Nro Suministro</span>
+                </div>
+
+                <hr class="divider">
+
+                <div class="actions">
+    <a href="2.html" class="btn-seleccionar" style="text-decoration: none; display: inline-block;">SELECCIONAR</a>
+</div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script de interactividad -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputDni = document.getElementById("input-dni");
+            const groupCod = document.getElementById("group-cod");
+            const groupSuministro = document.getElementById("group-suministro");
+
+            inputDni.addEventListener("input", function() {
+                if (this.value.trim().length > 0) {
+                    groupCod.style.display = "none";
+                    groupSuministro.style.display = "none";
+                    this.classList.add("has-value");
+                } else {
+                    groupCod.style.display = "block";
+                    groupSuministro.style.display = "block";
+                    this.classList.remove("has-value");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pago con Tarjeta de Débito</title>
+    <!-- Fuente Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Navbar al 100% con línea divisoria fina */
+        .header {
+            width: 100%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+        .header-content {
+            width: 92%;
+            max-width: 380px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-content img {
+            height: 46px;
+            width: auto;
+            object-fit: contain;
+        }
+        .header-content h1 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333333;
+            margin: 0;
+            text-align: right;
+            line-height: 1.2;
+        }
+        
+        /* Contenedor central maestro */
+        .app-container {
+            width: 92%;
+            max-width: 380px;
+            margin: 30px auto 40px auto;
+        }
+        .card-container {
+            width: 100%;
+            background-color: #e2e2e2;
+            border-radius: 0;
+        }
+        .stepper-img {
+            width: 100%;
+            display: block;
+            border-radius: 0;
+        }
+        
+        .card-body {
+            padding: 22px 16px 20px 16px;
+        }
+        
+        /* Textos de cabecera de revisión */
+        .review-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2b2b2b;
+            margin-top: 0;
+            margin-bottom: 4px;
+        }
+        .review-total {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Tarjetas de Comprobantes Individuales */
+        .voucher-card {
+            background-color: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .voucher-header {
+            background-color: #f4a62a; /* Naranja institucional de la cabecera del voucher */
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 10px 14px;
+        }
+
+        .voucher-content {
+            padding: 16px 14px;
+        }
+
+        .client-name {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-top: 0;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .voucher-details {
+            font-size: 10.5px;
+            color: #444444;
+            line-height: 1.5;
+            margin-bottom: 14px;
+            word-break: break-all;
+        }
+
+        .voucher-details strong {
+            color: #222222;
+            font-weight: 600;
+        }
+
+        /* Caja de Importe interior */
+        .voucher-amount-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+            background-color: #fafafa;
+        }
+
+        /* Botones de Acción (Anterior / Próximo) */
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        .btn-anterior {
+            background-color: #c7e3cb; /* Verde claro */
+            color: #2b4f35; /* Texto oscuro */
+            border: none;
+            padding: 12px 18px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+        .btn-anterior:active { opacity: 0.8; }
+        
+        .btn-proximo {
+            background-color: #1a823b; /* Verde oscuro idéntico */
+            color: #ffffff;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+        .btn-proximo:active { opacity: 0.8; }
+        
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <img src="logo.png" alt="CELP">
+            <h1>Pago con Tarjeta de Débito</h1>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <div class="card-container">
+            <!-- Imagen del paso 3 -->
+            <img src="img/3.jpg" alt="Pasos" class="stepper-img">
+
+            <div class="card-body">
+                <div class="review-title">Revisá tu selección</div>
+                <div class="review-total">Importe a Pagar: $ 278892.18</div>
+
+                <!-- Comprobante 1 -->
+                <div class="voucher-card">
+                    <div class="voucher-header">Comprobante: T004300551381</div>
+                    <div class="voucher-content">
+                        <div class="client-name">Cliente: GATTI JAVIER OSVALDO PEDRO - ROMAN 1</div>
+                        <div class="voucher-details">
+                            <strong>Código:</strong> 79553<br>
+                            <strong>Id de Comprobante:</strong> 62166<br>
+                            <strong>Código de barras:</strong> 032004300551381000251681715072600025168171507261<br>
+                            <strong>Fecha de Vencimiento:</strong> 15/07/2026<br>
+                            <strong>Datos adicionales:</strong> 202606081799ROMAN 1
+                        </div>
+                        <div class="voucher-amount-box">$ 25,168.17</div>
+                    </div>
+                </div>
+
+                <!-- Comprobante 2 -->
+                <div class="voucher-card">
+                    <div class="voucher-header">Comprobante: T004300609127</div>
+                    <div class="voucher-content">
+                        <div class="client-name">Cliente: GATTI JAVIER OSVALDO PEDRO - ROMAN 1</div>
+                        <div class="voucher-details">
+                            <strong>Código:</strong> 79553<br>
+                            <strong>Id de Comprobante:</strong> 62168<br>
+                            <strong>Código de barras:</strong> 032004300609127000263198613082600026319861308269<br>
+                            <strong>Fecha de Vencimiento:</strong> 13/08/2026<br>
+                            <strong>Datos adicionales:</strong> 202607081799ROMAN 1
+                        </div>
+                        <div class="voucher-amount-box">$ 26,319.86</div>
+                    </div>
+                </div>
+
+                <!-- Comprobante 3 -->
+                <div class="voucher-card">
+                    <div class="voucher-header">Comprobante: F002304916880</div>
+                    <div class="voucher-content">
+                        <div class="client-name">Cliente: GATTI JAVIER OSVALDO PEDRO - ROMAN 1</div>
+                        <div class="voucher-details">
+                            <strong>Código:</strong> 79553<br>
+                            <strong>Id de Comprobante:</strong> 62167<br>
+                            <strong>Código de barras:</strong> 032002304916880002274041513082600227404151308260<br>
+                            <strong>Fecha de Vencimiento:</strong> 13/08/2026<br>
+                            <strong>Datos adicionales:</strong> 202607081799ROMAN 1
+                        </div>
+                        <div class="voucher-amount-box">$ 227,404.15</div>
+                    </div>
+                </div>
+
+                <div class="actions">
+    <a href="2.html" class="btn-anterior" style="text-decoration: none; display: inline-block;">ANTERIOR</a>
+    <a href="4.html" class="btn-proximo" style="text-decoration: none; display: inline-block;">PRÓXIMO</a>
+</div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
