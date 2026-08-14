@@ -144,24 +144,38 @@
             margin: 18px 0 14px 0;
         }
 
-        /* Botón Seleccionar */
+        /* Botones Anterior y Seleccionar/Buscar - Ahora mucho más compactos (menos largos) */
         .actions {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .btn-seleccionar {
-            background-color: #1e873b; /* Verde idéntico a la imagen original */
-            color: #ffffff;
+        .btn-anterior {
+            background-color: #cbe5d2; /* Verde pálido exacto de la última imagen */
+            color: #4a4a4a; /* Gris oscuro para el texto, tal cual el original */
             border: none;
-            padding: 12px 20px; /* Tamaño un poco más ancho e idéntico */
-            border-radius: 4px; /* Bordes ligeramente más suaves */
-            font-size: 13px; /* Tamaño de texto adecuado */
-            font-weight: 600; /* Peso de fuente para que calce perfecto */
+            padding: 9px 12px; /* Relleno lateral menor para que sea más corto */
+            border-radius: 4px; /* Bordes ligeramente suaves */
+            font-size: 11px; /* Letra ajustada */
+            font-weight: 600;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+        }
+
+        .btn-seleccionar {
+            background-color: #1e873b; /* Verde original */
+            color: #ffffff;
+            border: none;
+            padding: 9px 12px; /* Relleno lateral menor para que sea más corto */
+            border-radius: 4px; /* Bordes ligeramente suaves */
+            font-size: 11px; /* Letra ajustada */
+            font-weight: 600; 
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            margin-left: auto; /* Mantiene el botón pegado a la derecha siempre */
         }
     </style>
 </head>
@@ -206,8 +220,8 @@
                 <hr class="divider">
 
                 <div class="actions">
-    <a href="2.html" class="btn-seleccionar" style="text-decoration: none; display: inline-block;">SELECCIONAR</a>
-</div>
+                    <a href="2.html" class="btn-seleccionar" style="text-decoration: none; display: inline-block;">BUSCAR</a>
+                </div>
 
             </div>
         </div>

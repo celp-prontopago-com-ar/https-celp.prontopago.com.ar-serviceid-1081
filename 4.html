@@ -3,822 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PRONTO PAGO S A</title>
+    <title>Pago con Tarjeta de Débito</title>
+    <!-- Fuente Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ==============================================
-           RESET Y ESTILOS GLOBALES
-           ============================================== */
         * {
             box-sizing: border-box;
+        }
+
+        body {
             margin: 0;
             padding: 0;
-            font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #f4f4f4; /* Fondo gris claro inicial */
-            color: #333;
-            min-height: 100vh;
-            transition: background-color 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ==============================================
-           ESTILO FUENTE ORIGINAL ALERTA SWEETALERT
-           ============================================== */
-        .swal2-title {
-            font-family: Georgia, "Times New Roman", serif !important;
-            font-weight: bold !important;
-            color: #545454 !important;
-        }
-
-        /* ==============================================
-           ESTILOS: VISTA DE PAGO (INDEX)
-           ============================================== */
-        
-        .top-dark-bar {
-            background-color: #333333;
-            height: 52px;
+        /* Encabezado al 100% para lograr la separación exacta */
+        .header {
             width: 100%;
+            border-bottom: 1px solid #dcdcdc;
+            padding: 12px 0;
+            background-color: #ffffff;
         }
 
-        .header-brand {
-            padding: 22px 15px 15px 15px;
-            background-color: #f4f4f4;
-        }
-        .header-brand h1 {
-            font-size: 20px;
-            font-weight: 400;
-            color: #333;
-            letter-spacing: 0.3px;
-        }
-
-        .container {
-            max-width: 100%;
-            padding: 0 15px;
-            padding-bottom: 40px;
-        }
-
-        .panel {
-            background-color: #fff;
-            border: 1px solid #e6e6e6; 
-            border-radius: 2px;
-            margin-bottom: 20px;
-            padding: 22px 18px;
-        }
-
-        .panel-title {
-            font-size: 18px;
-            font-weight: 400;
-            color: #333;
-            margin-bottom: 22px;
-            line-height: 1.3;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-        label {
-            display: inline-block;
-            margin-bottom: 6px;
-            font-weight: 400;
-            font-size: 13px; 
-            color: #555;
-        }
-        
-        .form-control {
-            display: block;
-            width: 100%;
-            height: 38px; 
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #333;
-            background-color: #fff;
-            border: 1px solid #ccc; 
-            border-radius: 3px;
-            box-shadow: none; 
-            outline: none;
-            transition: border-color ease-in-out .15s;
-        }
-        .form-control:focus {
-            border-color: #00789E;
-        }
-
-        .custom-select-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .custom-select {
+        .header-content {
+            width: 92%;
+            max-width: 380px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
-            width: 100%;
-            height: 38px;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            background: #fff;
         }
-        .custom-select.active {
-            border-color: #00789E;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .custom-select-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            color: #333;
-            height: 100%;
-        }
-        .custom-select-content img {
-            height: 14px; 
+
+        .header-content img {
+            height: 44px;
             width: auto;
             object-fit: contain;
         }
-        .custom-arrow {
-            width: 12px;
-            height: 12px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-        }
 
-        .custom-options {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #fff;
-            border: 1px solid #00789E;
-            border-top: none;
-            border-radius: 0 0 3px 3px;
-            z-index: 1000;
-            display: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            max-height: 280px;
-            overflow-y: auto;
-        }
-        .custom-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #333;
-        }
-        .custom-option:hover {
-            background-color: #f5f5f5;
-        }
-        .custom-option img {
-            width: 32px;
-            height: 20px;
-            object-fit: contain;
-        }
-
-        .logos-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px; 
-            margin-bottom: 24px;
-        }
-        .logo-box {
-            width: 48px;
-            height: 30px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            padding: 3px;
-        }
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-        }
-
-        .select-native-wrapper {
-            position: relative;
-        }
-        .select-native-wrapper select {
-            appearance: none;
-            -webkit-appearance: none;
-            padding-right: 30px;
-            background-color: #fff;
-        }
-        .select-native-wrapper::after {
-            content: '';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            pointer-events: none;
-        }
-
-        .input-group {
-            display: flex;
-            width: 100%;
-        }
-        .input-group .form-control {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-right: none; 
-        }
-        .input-group-addon {
-            padding: 6px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-left: none; 
-            border-radius: 0 3px 3px 0;
-            width: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        .input-group-addon svg {
-            width: 18px;
-            height: 18px;
-            fill: #555;
-        }
-
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 35px; 
-            margin-bottom: 5px;
-        }
-        .btn {
-            display: block;
-            width: 100%;
+        .header-content h1 {
+            font-size: 13.5px;
             font-weight: 500;
-            text-align: center;
-            cursor: pointer;
-            padding: 12px; 
-            font-size: 13px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
-        }
-        .btn:active {
-            opacity: 0.8;
-        }
-        .btn-cancel {
-            color: #00789E; 
-            background-color: #fff;
-            border: 1px solid #00789E;
-        }
-        .btn-accept {
-            color: #fff;
-            background-color: #00789E;
-            border: 1px solid #00789E;
+            color: #333333;
+            margin: 0;
+            text-align: right;
+            line-height: 1.2;
         }
 
-        .order-panel h3 {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #333;
-        }
-        .order-total {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #000;
-        }
-        .order-total strong {
-            font-size: 15px;
-            font-weight: bold;
+        /* Contenedor central maestro */
+        .app-container {
+            width: 92%;
+            max-width: 380px;
+            margin: 24px auto 30px auto;
         }
 
-        .security-footer {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 5px 5px 20px 5px;
+        /* Tarjeta Principal */
+        .card-container {
+            width: 100%;
+            background-color: #dedede;
+            border-radius: 0;
         }
-        .security-icon {
-            flex-shrink: 0;
-            width: 22px;
-            height: 22px;
-            fill: #666;
-            margin-top: 1px;
+
+        /* Imagen Verde de Pasos */
+        .stepper-img {
+            width: 100%;
+            display: block;
+            border-radius: 0;
         }
-        .security-text {
-            font-size: 11px;
-            color: #888;
+
+        /* Cuerpo del Formulario */
+        .card-body {
+            padding: 18px 16px 16px 16px;
+        }
+
+        .card-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-top: 0;
+            margin-bottom: 8px; /* Reducido un poco para dar espacio al subtitulo */
             line-height: 1.3;
         }
 
-        /* ==============================================
-           ESTILOS: VISTA DE COMPROBANTE
-           ============================================== */
-        
-        .celp-header {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 8px 15px;
-            background: #ffffff;
-            border-bottom: 1px solid #eaeaea;
-            gap: 15px;
-        }
-        .celp-logo-wrapper {
-            display: flex;
-            align-items: center;
-        }
-        .celp-logo-wrapper img {
-            max-height: 50px;
-            object-fit: contain;
-        }
-        .celp-header-title {
-            font-size: 15px; 
-            color: #333333;
+        /* Subtítulo de Fiserv */
+        .card-subtitle {
+            font-size: 11px;
+            color: #555555;
+            margin-top: 0;
+            margin-bottom: 18px;
+            line-height: 1.4;
             font-weight: 400;
         }
 
-        .success-main-card {
-            margin: 20px 15px;
-            box-shadow: none;
+        /* Grupos de Inputs */
+        .input-group {
+            margin-bottom: 14px;
         }
-        
-        .success-top {
-            background-color: #238942;
-            padding: 24px 20px;
-            text-align: center;
-            color: white;
-        }
-        .success-top img.success-star-img {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 6px;
-            object-fit: contain;
-        }
-        .success-top-text {
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .success-body {
-            background-color: #dbdbdb; 
-            padding: 20px 15px;
-        }
-        
-        .success-title {
-            font-size: 15px;
+
+        .input-group label {
+            display: block;
+            font-size: 10px;
             font-weight: 700;
             color: #333333;
-            margin-bottom: 6px;
-        }
-        .success-desc {
-            font-size: 12px;
-            color: #666666;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        
-        .dotted-divider {
-            border-top: 1px dotted #b5b5b5; 
-            margin: 15px 0;
-        }
-        .solid-divider {
-            border-top: 1px solid #cccccc;
-            margin: 20px 0;
+            margin-bottom: 4px;
         }
 
-        .ref-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #1c2138; 
-            margin-bottom: 12px;
-        }
-        .btn-download {
-            background-color: #1f893e;
-            color: #ffffff;
+        .input-group input {
+            width: 100%;
+            height: 38px;
+            padding: 0 10px;
             border: none;
-            padding: 10px 12px;
-            font-size: 11px;
-            font-weight: 600;
             border-radius: 3px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-        .ref-number {
-            font-size: 13px;
-            font-weight: 700;
-            color: #000000;
-            word-break: break-all;
+            background-color: #f4f7f9; /* Color gris muy clarito casi blanco, idéntico a la foto */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12.5px;
+            color: #333333;
+            outline: none;
         }
 
-        .btn-right-wrapper {
+        .input-group input:focus, 
+        .input-group input.has-value {
+            background-color: #e8f0fe !important;
+        }
+
+        /* Línea Divisora */
+        .divider {
+            border: none;
+            border-top: 1px solid #cfcfcf;
+            margin: 18px 0 14px 0;
+        }
+
+        /* Botones Anterior y Próximo (Con los tamaños perfectos del paso anterior) */
+        .actions {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
         }
-        .btn-another {
-            background-color: #49b578;
-            color: #ffffff;
+
+        .btn-anterior {
+            background-color: #cbe5d2;
+            color: #4a4a4a;
             border: none;
-            padding: 10px 15px;
+            padding: 9px 12px;
+            border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
-            border-radius: 3px;
             cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .btn-seleccionar {
+            background-color: #1e873b;
+            color: #ffffff;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600; 
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            margin-left: auto;
         }
     </style>
 </head>
 <body>
 
-    <!-- ==============================================
-         CONTENEDOR 1: FORMULARIO DE PAGO
-         ============================================== -->
-    <div id="view-payment">
-        <div class="top-dark-bar"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="logo.png" alt="CELP">
+            <h1>Pago con Tarjeta de Débito</h1>
+        </div>
+    </header>
 
-        <div id="view-form">
-            <div class="header-brand">
-                <h1>PRONTO PAGO S A</h1>
-            </div>
+    <!-- Contenedor Maestro -->
+    <div class="app-container">
 
-            <div class="container">
-                <div class="panel">
-                    <div class="panel-title">Por favor seleccionar forma de pago</div>
-                    
-                    <div class="form-group">
-                        <label>Forma de pago</label>
-                        <div class="custom-select-wrapper">
-                            <div class="custom-select" id="customSelect" onclick="toggleDropdown()">
-                                <div class="custom-select-content">
-                                    <img id="selectedIcon" src="https://www5.ipg-online.com/connect/images/brands/VISA.png" alt="VISA">
-                                    <span id="selectedText">VISA</span>
-                                </div>
-                                <div class="custom-arrow"></div>
-                            </div>
-                            
-                            <div class="custom-options" id="customOptions">
-                                <div class="custom-option" onclick="selectOption('VISA', 'https://www5.ipg-online.com/connect/images/brands/VISA.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/VISA.png" alt="VISA"> VISA
-                                </div>
-                                <div class="custom-option" onclick="selectOption('Mastercard', 'https://www5.ipg-online.com/connect/images/brands/MASTERCARD.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/MASTERCARD.png" alt="Mastercard"> Mastercard
-                                </div>
-                                <div class="custom-option" onclick="selectOption('Maestro', 'https://www5.ipg-online.com/connect/images/brands/MAESTRO.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/MAESTRO.png" alt="Maestro"> Maestro
-                                </div>
-                                <div class="custom-option" onclick="selectOption('Diners', 'https://www5.ipg-online.com/connect/images/brands/DINERSCLUB.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/DINERSCLUB.png" alt="Diners"> Diners
-                                </div>
-                                <div class="custom-option" onclick="selectOption('Discover', 'https://www5.ipg-online.com/connect/images/brands/DISCOVER.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/DISCOVER.png" alt="Discover"> Discover
-                                </div>
-                                <div class="custom-option" onclick="selectOption('Argencard', 'https://www5.ipg-online.com/connect/images/brands/ARGENCARD.png')">
-                                    <img src="https://www5.ipg-online.com/connect/images/brands/ARGENCARD.png" alt="Argencard"> Argencard
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Tarjeta Principal -->
+        <div class="card-container">
+            <!-- Usando la imagen 4.jpg tal cual pediste -->
+            <img src="img/4.jpg" alt="Pasos" class="stepper-img">
 
-                    <div class="logos-grid">
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/VISA.png" alt="Visa"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/MASTERCARD.png" alt="Mastercard"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/DINERSCLUB.png" alt="Diners"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/MAESTRO.png" alt="Maestro"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/DISCOVER.png" alt="Discover"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/ARGENCARD.png" alt="Argencard"></div>
-                        <div class="logo-box"><img src="https://www5.ipg-online.com/connect/images/brands/CABAL_ARGENTINA.png" alt="Cabal"></div>
-                    </div>
+            <div class="card-body">
+                <h2 class="card-title">Por favor, ingresá los siguientes datos</h2>
+                <p class="card-subtitle">Al presionar INICIAR PAGO serás redirigido a Fiserv para completar los datos de tu tarjeta de débito</p>
 
-                    <div class="form-group">
-                        <label>Número de tarjeta</label>
-                        <input type="text" class="form-control" id="cardNumber" inputmode="numeric">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Titular</label>
-                        <input type="text" class="form-control" id="cardHolder">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Válida hasta (mes)</label>
-                        <div class="select-native-wrapper">
-                            <select class="form-control" id="mes"></select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Válida hasta (año)</label>
-                        <div class="select-native-wrapper">
-                            <select class="form-control" id="anio"></select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Código de verificación de la tarjeta</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="cvvInput" inputmode="numeric" maxlength="4">
-                            <span class="input-group-addon" onclick="toggleCVV()">
-                                <svg viewBox="0 0 576 512">
-                                    <path d="M288 144a110.94 110.94 0 0 0 -31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1 -56 56 55.4 55.4 0 0 1 -27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="buttons-container">
-                        <button class="btn btn-cancel">CANCELAR</button>
-                        <button class="btn btn-accept" onclick="processPayment()">ACEPTAR</button>
-                    </div>
+                <div class="input-group">
+                    <label>Dirección de E-Mail</label>
+                    <input type="email" id="input-email" placeholder="">
                 </div>
 
-                <div class="panel order-panel">
-                    <h3>Su pedido</h3>
-                    <div class="order-row">
-                        <span>Meses sin intereses</span>
-                        <span>1</span>
-                    </div>
-                    <div class="order-total">
-                        <strong>Total</strong>
-                        <strong>$ 278.892,18 ARS</strong>
-                    </div>
+                <hr class="divider">
+
+                <div class="actions">
+                    <a href="3.html" class="btn-anterior" style="text-decoration: none; display: inline-block;">ANTERIOR</a>
+                    <a href="5.html" class="btn-seleccionar" style="text-decoration: none; display: inline-block;">PRÓXIMO</a>
                 </div>
 
-                <div class="security-footer">
-                    <svg class="security-icon" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
-                    <div class="security-text">
-                        Esta es una página segura que utiliza SSL/TLS (Secure Socket Layer/Transport Layer Security) para cifrar y transmitir sus datos de pago de una forma segura.
-                    </div>
-                </div>
             </div>
         </div>
+
     </div>
 
-    <!-- ==============================================
-         CONTENEDOR 2: COMPROBANTE (Oculto inicialmente)
-         ============================================== -->
-    <div id="view-receipt" style="display: none;">
-        <div class="celp-header">
-            <div class="celp-logo-wrapper">
-                <img src="logo.png" alt="CELP Cooperativa Eléctrica Limitada de Pergamino">
-            </div>
-            <div class="celp-header-title">Pago con Tarjeta de Débito</div>
-        </div>
-
-        <div class="success-main-card">
-            <div class="success-top">
-                <img src="logo2.png" alt="Listo" class="success-star-img">
-                <div class="success-top-text">Listo</div>
-            </div>
-            <div class="success-body">
-                <div class="success-title">¡Pago Exitoso!</div>
-                <div class="success-desc">Podés descargar el ticket, realizar otro pago, o cerrar el navegador</div>
-                
-                <div class="dotted-divider"></div>
-                
-                <div class="ref-title">Número de referencia para seguimiento de pago :</div>
-                
-                <button class="btn-download" onclick="descargarPDF()">DESCARGAR COMPROBANTE</button>
-                <div class="ref-number" contenteditable="true" style="outline: none;">3479200639215468470166997</div>
-                
-                <div class="solid-divider"></div>
-                
-                <div class="btn-right-wrapper">
-                    <button class="btn-another" onclick="resetPayment()">REALIZAR OTRO PAGO</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <!-- Librería jsPDF para generar el PDF desde Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <!-- Script de interactividad -->
     <script>
-        // Cargar meses dinámicamente
-        const mesSelect = document.getElementById('mes');
-        mesSelect.innerHTML += '<option value=""></option>';
-        for(let i = 1; i <= 12; i++) {
-            mesSelect.innerHTML += `<option>${i.toString().padStart(2, '0')}</option>`;
-        }
-        
-        // Cargar años dinámicamente
-        const anioSelect = document.getElementById('anio');
-        anioSelect.innerHTML += '<option value=""></option>';
-        const currentYear = new Date().getFullYear();
-        for(let i = currentYear; i <= currentYear + 10; i++) {
-            anioSelect.innerHTML += `<option>${i}</option>`;
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputEmail = document.getElementById("input-email");
 
-        // Funcionalidades del Dropdown
-        function toggleDropdown() {
-            const select = document.getElementById('customSelect');
-            const options = document.getElementById('customOptions');
-            select.classList.toggle('active');
-            options.style.display = options.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function selectOption(name, imgSrc) {
-            const imgElement = document.getElementById('selectedIcon');
-            const textElement = document.getElementById('selectedText');
-            
-            imgElement.src = imgSrc;
-            imgElement.style.display = 'block'; 
-            textElement.innerText = name;
-            
-            document.getElementById('customSelect').classList.remove('active');
-            document.getElementById('customOptions').style.display = 'none';
-        }
-
-        document.addEventListener('click', function(event) {
-            const container = document.querySelector('.custom-select-wrapper');
-            if (!container.contains(event.target)) {
-                document.getElementById('customSelect').classList.remove('active');
-                document.getElementById('customOptions').style.display = 'none';
-            }
-        });
-        
-        // Autodetección de tarjeta según el primer dígito
-        const cardNumberInput = document.getElementById('cardNumber');
-        if(cardNumberInput) {
-            cardNumberInput.addEventListener('input', function(e) {
-                const firstDigit = e.target.value.charAt(0);
-                if (firstDigit === '5') {
-                    selectOption('Mastercard', 'https://www5.ipg-online.com/connect/images/brands/MASTERCARD.png');
-                } else if (firstDigit === '4') {
-                    selectOption('VISA', 'https://www5.ipg-online.com/connect/images/brands/VISA.png');
+            inputEmail.addEventListener("input", function() {
+                if (this.value.trim().length > 0) {
+                    this.classList.add("has-value");
+                } else {
+                    this.classList.remove("has-value");
                 }
             });
-        }
-
-        // Mostrar / Ocultar CVV
-        function toggleCVV() {
-            const input = document.getElementById('cvvInput');
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
-
-        // TRANSICIÓN SPA (Single Page Application) - Muestra Alerta y cambia de vista
-        function processPayment() {
-            // Ocultamos formulario interior, dejamos fondo de carga oscuro
-            document.getElementById('view-form').style.display = 'none';
-            document.body.style.backgroundColor = '#969696';
-
-            Swal.fire({
-                icon: 'success', 
-                title: 'Transacción Concretada',
-                showConfirmButton: false, 
-                timer: 3000,
-                backdrop: '#969696'
-            }).then(() => {
-                // En vez de redirigir, ocultamos pago y mostramos comprobante en la misma hoja
-                document.getElementById('view-payment').style.display = 'none';
-                
-                // Cambiamos fondo para adaptarse a la vista del comprobante
-                document.body.style.backgroundColor = '#ffffff'; 
-                
-                // Mostramos el comprobante
-                document.getElementById('view-receipt').style.display = 'block';
-            });
-        }
-
-        // FUNCIONALIDAD: Volver a la página inicial al hacer clic en "Realizar otro pago"
-        function resetPayment() {
-            // Ocultamos comprobante
-            document.getElementById('view-receipt').style.display = 'none';
-            
-            // Volvemos al gris oscuro original
-            document.body.style.backgroundColor = '#f4f4f4';
-            
-            // Mostramos los contenedores iniciales
-            document.getElementById('view-payment').style.display = 'block';
-            document.getElementById('view-form').style.display = 'block';
-            
-            // Limpieza de campos por seguridad
-            document.getElementById('cardNumber').value = '';
-            document.getElementById('cardHolder').value = '';
-            document.getElementById('cvvInput').value = '';
-            document.getElementById('mes').value = '';
-            document.getElementById('anio').value = '';
-        }
-
-        // FUNCIONALIDAD: Generar y descargar PDF con la fecha y hora actual
-        function descargarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            // Formatear Fecha y Hora Actual al momento exacto de descargar
-            const now = new Date();
-            const dia = String(now.getDate()).padStart(2, '0');
-            const mes = String(now.getMonth() + 1).padStart(2, '0');
-            const anio = now.getFullYear();
-            const horas = String(now.getHours()).padStart(2, '0');
-            const minutos = String(now.getMinutes()).padStart(2, '0');
-            const fechaActual = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
-
-            // Contenido en formato de array (cada elemento es un renglón en el PDF)
-            const contenido = [
-                "PRONTO PAGO S.A.",
-                "CUIT 30-69746727-7 | TEL",
-                "0800-999-7326",
-                "",
-                "CONSTANCIA DE PAGO",
-                "Boca: 01003029",
-                "LINK DE PAGO - CELP",
-                "ESPAÑA 395",
-                "JUNIN (6000)",
-                "",
-                `Fecha: ${fechaActual}`,
-                "Op.: PRONTO PAGO S.A.",
-                "Identificacion: 297",
-                "Cod. Seg.: 1785537774122836352",
-                "",
-                "Servicio: COOP.ELECTRICA DE",
-                "PERG.LTDA - LINK DE PAGOS -",
-                "Cliente: 94910",
-                "Factura: F002304911737",
-                "Importe $ : $ 26,319.86",
-                "CB:",
-                "03200230491173700031382161308260003",
-                "1382161308268",
-                "",
-                "----------------------------",
-                "PRONTO PAGO S.A.",
-                "CUIT 30-69746727-7 | TEL",
-                "0800-999-7326",
-                "",
-                "CONSTANCIA DE PAGO",
-                "Boca: 01003029",
-                "LINK DE PAGO - CELP",
-                "ESPAÑA 395",
-                "JUNIN (6000)",
-                "",
-                `Fecha: ${fechaActual}`,
-                "Op.: PRONTO PAGO S.A.",
-                "Identificacion: 298",
-                "Cod. Seg.: 1785537774122836353",
-                "",
-                "Servicio: COOP.ELECTRICA DE",
-                "PERG.LTDA - LINK DE PAGOS -",
-                "Cliente: 94910",
-                "Factura: T004300605360",
-                "Importe $ : 227,404.15",
-                "CB:",
-                "03200430060536000014175461308260001",
-                "4175461308266",
-                "",
-                "----------------------------",
-                "PRONTO PAGO S.A.",
-                "CUIT 30-69746727-7 | TEL",
-                "0800-999-7326",
-                "",
-                "CONSTANCIA DE PAGO",
-                "Boca: 01003029",
-                "LINK DE PAGO - CELP",
-                "ESPAÑA 395",
-                "JUNIN (6000)",
-                "",
-                `Fecha: ${fechaActual}`,
-                "Op.: PRONTO PAGO S.A.",
-                "Identificacion: 299",
-                "Cod. Seg.: 1785537774122836354",
-                "",
-                "Servicio: Fiserv - Fiserv Eccomerce",
-                "Cliente:",
-                "Factura:",
-                "Importe $ : 25,168.17",
-                "CB:"
-            ];
-
-            // Configurar tipografía monoespaciada para estilo "ticket/factura" y tamaño 10
-            doc.setFont('courier'); 
-            doc.setFontSize(10);
-            
-            // Escribir el arreglo en el documento empezando en coordenadas (x: 15, y: 15)
-            doc.text(contenido, 15, 15);
-            
-            // Forzar la descarga en el cliente
-            doc.save('Comprobante_ProntoPago.pdf');
-        }
+        });
     </script>
+
 </body>
 </html>
