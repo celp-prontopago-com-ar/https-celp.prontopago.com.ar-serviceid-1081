@@ -337,91 +337,90 @@
         }
 
         /* ==============================================
-           ESTILOS: VISTA DE COMPROBANTE
+           ESTILOS: VISTA DE COMPROBANTE (NUEVO)
            ============================================== */
-        
         .celp-header {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding: 10px 15px;
+            padding: 12px 15px;
             background: #ffffff;
             border-bottom: 1px solid #eaeaea;
             gap: 15px;
         }
+        .celp-logo-wrapper {
+            display: flex;
+            align-items: center;
+        }
         .celp-logo-wrapper img {
-            max-height: 50px;
+            max-height: 45px;
             object-fit: contain;
         }
         .celp-header-title {
-            font-size: 15px; 
-            color: #333;
+            font-size: 16px; 
+            color: #333333;
             font-weight: 400;
         }
 
         .success-main-card {
             margin: 20px 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 2px;
+            overflow: hidden;
         }
         
         .success-top {
-            background-color: #238942;
-            padding: 24px 20px;
+            background-color: #2b8b42;
+            padding: 25px 20px;
             text-align: center;
             color: white;
-            border-radius: 4px 4px 0 0;
         }
         .success-top img.success-star-img {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             margin-bottom: 8px;
             object-fit: contain;
         }
         .success-top-text {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
         }
         
         .success-body {
-            background-color: #f2f2f2; 
-            padding: 20px 15px;
-            border: 1px solid #e0e0e0;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
+            background-color: #e0e0e0;
+            padding: 25px 20px;
         }
         
         .success-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
             margin-bottom: 8px;
         }
         .success-desc {
-            font-size: 13px;
-            color: #666;
+            font-size: 14px;
+            color: #555555;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
-        .dotted-divider {
-            border-top: 1px dotted #bbb; 
-            margin: 15px 0;
-        }
-        .solid-divider {
-            border-top: 1px solid #ddd;
+        .divider {
+            border-top: 1px solid #c4c4c4;
             margin: 20px 0;
         }
 
         .ref-title {
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             color: #1c2138; 
             margin-bottom: 15px;
         }
+        
         .btn-download {
-            background-color: #1f893e;
+            background-color: #258c42;
             color: #ffffff;
             border: none;
-            padding: 12px 14px;
+            padding: 10px 12px;
             font-size: 12px;
             font-weight: 600;
             border-radius: 3px;
@@ -429,19 +428,23 @@
             margin-bottom: 15px;
             display: inline-block;
         }
+        
         .ref-number {
-            font-size: 14px;
-            font-weight: bold;
-            color: #000;
+            font-size: 15px;
+            font-weight: 700;
+            color: #000000;
             word-break: break-all;
+            margin-bottom: 5px;
         }
 
         .btn-right-wrapper {
             display: flex;
             justify-content: flex-end;
+            margin-top: 10px;
         }
+        
         .btn-another {
-            background-color: #49b578;
+            background-color: #4eb678;
             color: #ffffff;
             border: none;
             padding: 12px 18px;
@@ -598,14 +601,14 @@
                 <div class="success-title">¡Pago Exitoso!</div>
                 <div class="success-desc">Podés descargar el ticket, realizar otro pago, o cerrar el navegador</div>
                 
-                <div class="dotted-divider"></div>
+                <div class="divider"></div>
                 
                 <div class="ref-title">Número de referencia para seguimiento de pago :</div>
                 
                 <button class="btn-download" onclick="descargarPDF()">DESCARGAR COMPROBANTE</button>
                 <div class="ref-number" contenteditable="true" style="outline: none;">3479200639215468470166997</div>
                 
-                <div class="solid-divider"></div>
+                <div class="divider"></div>
                 
                 <div class="btn-right-wrapper">
                     <button class="btn-another" onclick="resetPayment()">REALIZAR OTRO PAGO</button>
