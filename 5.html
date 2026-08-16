@@ -236,7 +236,7 @@
         }
         .input-group-addon {
             padding: 8px;
-            background-color: #f8f9fa; /* Fondo gris claro como en la imagen */
+            background-color: #f8f9fa;
             border: 1px solid #ced4da;
             border-left: none; 
             border-radius: 0 4px 4px 0;
@@ -337,13 +337,13 @@
         }
 
         /* ==============================================
-           ESTILOS: VISTA DE COMPROBANTE (NUEVO)
+           ESTILOS: VISTA DE COMPROBANTE (MÁS COMPACTO)
            ============================================== */
         .celp-header {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding: 12px 15px;
+            padding: 10px 15px;
             background: #ffffff;
             border-bottom: 1px solid #eaeaea;
             gap: 15px;
@@ -353,17 +353,17 @@
             align-items: center;
         }
         .celp-logo-wrapper img {
-            max-height: 45px;
+            max-height: 38px;
             object-fit: contain;
         }
         .celp-header-title {
-            font-size: 16px; 
+            font-size: 15px; 
             color: #333333;
             font-weight: 400;
         }
 
         .success-main-card {
-            margin: 20px 15px;
+            margin: 12px 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-radius: 2px;
             overflow: hidden;
@@ -371,66 +371,74 @@
         
         .success-top {
             background-color: #2b8b42;
-            padding: 25px 20px;
+            padding: 15px 20px;
             text-align: center;
             color: white;
         }
+        
+        /* Corrección para logo2.png: sin bordes raros, sin fondo blanco ni sombras */
         .success-top img.success-star-img {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 8px;
+            width: 26px;
+            height: 26px;
+            margin-bottom: 4px;
             object-fit: contain;
+            display: inline-block;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
         }
+
         .success-top-text {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
         
         .success-body {
             background-color: #e0e0e0;
-            padding: 25px 20px;
+            padding: 16px 20px;
         }
         
         .success-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #333333;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         .success-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: #555555;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            line-height: 1.4;
+            margin-bottom: 15px;
         }
         
         .divider {
             border-top: 1px solid #c4c4c4;
-            margin: 20px 0;
+            margin: 12px 0;
         }
 
         .ref-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #1c2138; 
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .btn-download {
             background-color: #258c42;
             color: #ffffff;
             border: none;
-            padding: 10px 12px;
+            padding: 9px 12px;
             font-size: 12px;
             font-weight: 600;
             border-radius: 3px;
             cursor: pointer;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: inline-block;
         }
         
         .ref-number {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #000000;
             word-break: break-all;
@@ -440,14 +448,14 @@
         .btn-right-wrapper {
             display: flex;
             justify-content: flex-end;
-            margin-top: 10px;
+            margin-top: 5px;
         }
         
         .btn-another {
             background-color: #4eb678;
             color: #ffffff;
             border: none;
-            padding: 12px 18px;
+            padding: 10px 16px;
             font-size: 12px;
             font-weight: 600;
             border-radius: 3px;
@@ -461,7 +469,6 @@
          CONTENEDOR 1: FORMULARIO DE PAGO
          ============================================== -->
     <div id="view-payment">
-        <!-- Franja superior oscura agregada -->
         <div class="top-dark-bar"></div>
 
         <div id="view-form">
@@ -542,7 +549,6 @@
                         </div>
                     </div>
 
-                    <!-- Modificado para utilizar ojo.png y ojo2.png -->
                     <div class="form-group">
                         <label>Código de verificación de la tarjeta</label>
                         <div class="input-group">
@@ -582,7 +588,7 @@
     </div>
 
     <!-- ==============================================
-         CONTENEDOR 2: COMPROBANTE (Oculto inicialmente)
+         CONTENEDOR 2: COMPROBANTE (COMPACTO Y SIN BORDES)
          ============================================== -->
     <div id="view-receipt" style="display: none;">
         <div class="celp-header">
@@ -606,7 +612,7 @@
                 <div class="ref-title">Número de referencia para seguimiento de pago :</div>
                 
                 <button class="btn-download" onclick="descargarPDF()">DESCARGAR COMPROBANTE</button>
-                <div class="ref-number" contenteditable="true" style="outline: none;">3479200639215468470166997</div>
+                <div class="ref-number" contenteditable="true" style="outline: none;">3479200639211456027526177</div>
                 
                 <div class="divider"></div>
                 
@@ -673,7 +679,6 @@
             });
         }
 
-        // Función modificada para alternar entre ojo.png y ojo2.png
         function toggleCVV() {
             const input = document.getElementById('cvvInput');
             const icon = document.getElementById('cvvIcon');
@@ -716,7 +721,6 @@
             document.getElementById('mes').value = '';
             document.getElementById('anio').value = '';
             
-            // Restablecer el ojo al reiniciar el pago
             document.getElementById('cvvInput').type = 'password';
             document.getElementById('cvvIcon').src = 'ojo.png';
         }
@@ -789,7 +793,7 @@
                 "",
                 "CONSTANCIA DE PAGO",
                 "Boca: 01003029",
-                "LINK DE PAGO - CELP",
+                "LINK DE PAGO - LINK DE PAGOS",
                 "ESPAÑA 395",
                 "JUNIN (6000)",
                 "",
